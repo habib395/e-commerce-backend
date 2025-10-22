@@ -16,23 +16,9 @@ const connectDB = async() => {
       await client.db("admin").command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
-    //products related apis
-    // const productCollection = client.db('e-commerce').collection('products');
-
-    // app.get('/products', async(req, res) => {
-    //     try {
-    //         const cursor = productCollection.find();
-    //         const result = await cursor.toArray();
-    //         res.send(result)
-    //     } catch (error) {
-    //         console.error(err)
-    //         res.status(500).send({ message: "Error fetching products"});
-    //     }
-    // });
-
     } catch {
-        console.error("MongoDB Connection Error:, error")
+        console.error("MongoDB Connection Error:", error)
     }
 }
 
-module.exports = {connectDB, client};
+module.exports = { connectDB, client };

@@ -14,14 +14,13 @@ app.use(express.json())
 const startServer = async() =>{
     try {
         await connectDB()
-        console.log('DB connection established successfull')
+        console.log('DB connection established successful')
 
         app.get('/', (req, res) => {
             res.send('E-commerce site is open and ready')
         })
 
-        //products routes
-        app.use('/api/v1/products', productRoutes)
+        app.use('/api/v1', productRoutes)
 
         app.listen(port, () => {
             console.log(`product is waiting for sell at port: ${port}`)
