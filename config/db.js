@@ -1,3 +1,4 @@
+
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.DB_URI;
 
@@ -16,8 +17,9 @@ const connectDB = async() => {
       await client.db("admin").command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
-    } catch {
-        console.error("MongoDB Connection Error:", error)
+    } catch(error) {
+        console.error("MongoDB Connection Error:", error);
+        process.exit(1); 
     }
 }
 

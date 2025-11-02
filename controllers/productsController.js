@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 
 const productCollection = client.db('e-commerce').collection('products');
 const MAX_HOME_PRODUCTS = 20;
-
+ 
 exports.getAllProducts = async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 0; 
@@ -133,10 +133,11 @@ exports.getUniqueCategories = async (req, res) => {
     }
 }
 
+
 exports.getUniqueBrands = async (req, res) => {
     try {
         const brandsCursor = productCollection.aggregate([
-            { $group: { _id: "$brand" } }, 
+            { $group: { _id: "$brand" } },
             { $group: { _id: null, brands: { $push: "$_id" } } },
             { $project: { _id: 0, brands: 1 } }
         ]);
@@ -146,7 +147,7 @@ exports.getUniqueBrands = async (req, res) => {
 
         res.status(200).send({
             success: true,
-            data: brands,
+            data: brands // 'categories' এর বদলে 'brands'
         });
         
     } catch (error) {
